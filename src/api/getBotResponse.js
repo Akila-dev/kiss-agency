@@ -1,13 +1,10 @@
 export const getResponse = async (question) => {
 	try {
-		const res = await fetch(
-			`${process.env.VITE_BOT_API_URL || 'https://chat.kissagency.co'}/qa`,
-			{
-				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: new URLSearchParams({ question: question }),
-			}
-		);
+		const res = await fetch(`${process.env.VITE_BOT_API_URL}/qa`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: new URLSearchParams({ question: question }),
+		});
 
 		const data = await res.json();
 
