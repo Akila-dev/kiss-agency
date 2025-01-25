@@ -36,6 +36,7 @@ const Footer = ({ type }) => {
 					variants={slideInBottom2}
 					initial="initial"
 					whileInView="animate"
+					viewport={{ once: true }}
 					className="mt-[8px]"
 				>
 					<h2>Contact</h2>
@@ -63,6 +64,7 @@ const Footer = ({ type }) => {
 					variants={slideInBottom2}
 					initial="initial"
 					whileInView="animate"
+					viewport={{ once: true }}
 				>
 					<h2>Mail</h2>
 					<p>
@@ -76,6 +78,7 @@ const Footer = ({ type }) => {
 					variants={slideInBottom2}
 					initial="initial"
 					whileInView="animate"
+					viewport={{ once: true }}
 				>
 					<h2>Socials</h2>
 					<p className="flex gap-2 pt-1">
