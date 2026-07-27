@@ -158,13 +158,14 @@ export const opacityVariant = {
 export const revealText = {
 	initial: { opacity: 0, x: 0, y: 0 },
 	animate: {
-		opacity: 1,
+	opacity: 1,
 		x: [100, 0],
-		y: [-100, 0],
+		// y: [-100, 0],
 		transition: {
-			type: 'spring',
-			stiffness: 500,
-			damping: 85,
+			type: "spring",
+			stiffness: 1000,
+			damping: 40,
+			mass: 0.5,
 		},
 	},
 };

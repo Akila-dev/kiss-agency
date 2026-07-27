@@ -47,10 +47,10 @@ const Services = () => {
 		<div
 			ref={container}
 			// id="services"
-			className="w-full relative mt-[50px] section-py"
+			className="w-full relative section-pt section-pb"
 		>
-			<div className="container grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-5">
-				<div className="space-y-7 lg:space-y-10 xl:pr-10 self-center">
+			<div className="container grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-2">
+				<div className="md:pb-5 lg:pb-0 md:pr-8 xl:pr-10 self-center">
 					<Heading
 						tag={servicesSectionText.tag}
 						header={servicesSectionText.heading}
@@ -58,10 +58,10 @@ const Services = () => {
 						btn={['Learn More', scrollToContact, '#contact']}
 					/>
 				</div>
-				<div>
+				<div className="pt-8 md:pt-0">
 					<ServicesSlide services={services} />
 				</div>
-				<div className="col-span-1 lg:col-span-2">
+				<div className="col-span-1 md:col-span-2">
 					<ServiceList scrollYProgress={scrollYProgress} />
 				</div>
 			</div>

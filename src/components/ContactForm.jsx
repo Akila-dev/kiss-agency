@@ -94,9 +94,9 @@ const ContactForm = () => {
 	return (
 		<div
 			id="contact-form"
-			className="bg-[--neutral] w-full p-5 lg:p-7 space-y-5"
+			className="bg-[--neutral] w-full p-4 md:p-5 lg:p-7 space-y-5 border-t border-[--gray border-gray-300 lg:border-none"
 		>
-			<h2 className="text-xl lg:text-2xl">Send us a message</h2>
+			<h2 className="text-lg lg:text-2xl">Send us a message</h2>
 			{!isFormSubmitted ? (
 				<form
 					ref={form}

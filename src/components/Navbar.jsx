@@ -31,15 +31,10 @@ const getWindowsDimension = () => {
 
 const Navbar = ({ sectionInView }) => {
 	// !NAVIGATION
-	const navId = useNavStore((state) => state.navId);
-	const updateNavId = useNavStore((state) => state.updateNavId);
-	const containerWidth = useContainerWidthStore((state) => state.width);
-	const aboutWidth = useAboutWidthStore((state) => state.width);
-	const valuesWidth = useValuesWidthStore((state) => state.width);
-	const setShowCallNow = useCallNowStore((state) => state.updateshowPopup);
-	const [navPoint, setNavPoint] = useState();
-	// const showingIFrame = useToggleIFrameStore((state) => state.toggleIFrame);
-	const [showingIFrame, setShowingIFrame] = useState(false);
+    const [activeId, setActiveId] = useState(''); // * Active section ID
+
+	const setShowCallNow = useCallNowStore((state) => state.updateshowPopup); // * Show call now popup
+	const [showingIFrame, setShowingIFrame] = useState(false); // * Show iframe
 
 	const [screenSize, setScreenSize] = useState(getWindowsDimension());
 
@@ -54,15 +49,10 @@ const Navbar = ({ sectionInView }) => {
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
 
-	const navigateToFunction = async (link) => {
-		window.scrollTo({ top: 0 });
-		setScrolledOffHero(true);
-		updateNavId(link);
-	};
-
 	const [menuToggled, setMenuToggled] = useState(false);
 	const [scrolledOffHero, setScrolledOffHero] = useState(false);
 
+	// * DETECT WHEN TO SHOW STICKY NAVBAR
 	useEffect(() => {
 		const handleScroll = () => {
 			const scrollTop = window.scrollY;
@@ -86,72 +76,43 @@ const Navbar = ({ sectionInView }) => {
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
 
-	// NAVIGATION SCROLL
-	const heroScrollSize = screenSize.height * 4;
-	const wrapperScrollSize = screenSize.height * 6;
+	// * TRACK WHICH SECTION IS IN VIEW
+	const navLinks = navigation.map((nav) => ({ id: nav.link, text: nav.text })); // * Navigation links with IDs
+	useEffect(() => {
+		// Defines the trigger window: highlights when a section takes up the center-top of screen
+		const options = {
+			root: null,
+			rootMargin: '-20% 0px -55% 0px', 
+			threshold: 0,
+		};
 
-	const contactPoint = heroScrollSize + wrapperScrollSize - screenSize.height;
-	const aboutPoint = heroScrollSize;
-	const valuesPoint =
-		18 +
-		heroScrollSize +
-		(screenSize.width / containerWidth) * wrapperScrollSize;
-	const solutionsPoint =
-		-18 +
-		contactPoint -
-		(screenSize.width / containerWidth) * wrapperScrollSize;
-	const servicesPoint =
-		-9 +
-		solutionsPoint -
-		(screenSize.width / containerWidth) * wrapperScrollSize;
+		const callback = (entries) => {
+			entries.forEach((entry) => {
+				// Update the active state only when the section enters the trigger window
+				if (entry.isIntersecting) {
+				setActiveId(entry.target.id);
+				}
+			});
+		};
 
-	const scrollPoints = [
-		{ top: 0, behavior: 'smooth' },
-		{ top: aboutPoint, behavior: 'smooth' },
-		{ top: valuesPoint, behavior: 'smooth' },
-		{ top: servicesPoint, behavior: 'smooth' },
-		{ top: solutionsPoint, behavior: 'smooth' },
-		{ top: contactPoint, behavior: 'smooth' },
-		{ top: contactPoint * 100, behavior: 'smooth' }, //Just dub content for nav code
-	];
+		const observer = new IntersectionObserver(callback, options);
+
+		// Bind observer to each HTML section element
+		navLinks.forEach((link) => {
+			const element = document.getElementById(link.id);
+			if (element) observer.observe(element);
+		});
+
+		return () => observer.disconnect();
+	}, []);
+
+
 
 	const socialIcons = [
 		<FaFacebookF className="text-xl" />,
 		<FaInstagram className="text-2xl" />,
 		<BiMessageRounded className="text-2xl" />,
 	];
-
-	useEffect(() => {
-		const handleScroll = () => {
-			const scrollTop = window.scrollY;
-
-			const navs = [
-				'home',
-				'about',
-				'values',
-				'services',
-				'digital-solutions',
-				'contact',
-			];
-			let scrollPos = 0;
-
-			if (scrollTop && navs) {
-				for (let i = 0; i < scrollPoints.length; i++) {
-					if (scrollPoints[i].top - screenSize.height / 1.5 <= scrollTop) {
-						scrollPos = i;
-					} else {
-						scrollPos = scrollPos;
-					}
-				}
-			}
-
-			setNavPoint(navs[scrollPos]);
-		};
-
-		window.addEventListener('scroll', handleScroll);
-
-		return () => window.removeEventListener('scroll', handleScroll);
-	}, [scrollPoints]);
 
 	return (
 		<>
@@ -164,7 +125,7 @@ const Navbar = ({ sectionInView }) => {
 						transition={{ duration: 0.5, type: 'tween' }}
 						className={`${
 							showingIFrame ? 'w-[75vw]' : 'w-full'
-						} bg-white fixed top-0 left-0 h-[70px] lg:h-[80px] items-center justify-center shadow z-[]`}
+						} bg-white fixed top-0 left-0 h-[70px] lg:h-[80px] items-center justify-center shadow z-[100]`}
 					>
 						<div className="container flex items-center justify-between gap-[25px] xl:gap-[50px] relative h-full">
 							<div
@@ -173,29 +134,15 @@ const Navbar = ({ sectionInView }) => {
 								} flex-1 justify-between items-center w-full`}
 							>
 								{navigation.slice(0, 4).map(({ text, link }, i) =>
-									screenSize.width >= 1280 ? (
-										<a
-											onClick={() => window.scrollTo(scrollPoints[i])}
-											key={i}
-											className={`navlinks ${
-												navPoint === link ? '!bg-[--black] !text-[--white]' : ''
-											}`}
-										>
-											{text}
-										</a>
-									) : (
-										<a
-											key={i}
-											href={'#' + link}
-											className={`navlinks ${
-												sectionInView === link
-													? '!bg-[--black] !text-[--white]'
-													: ''
-											}`}
-										>
-											{text}
-										</a>
-									)
+									(<a
+										key={i}
+										href={'#' + link}
+										className={`navlinks ${
+											activeId === link ? '!bg-[--black] !text-[--white]' : ''
+										}`}
+									>
+										{text}
+									</a>)
 								)}
 							</div>
 							<div className="">
@@ -207,39 +154,16 @@ const Navbar = ({ sectionInView }) => {
 								} flex-1 justify-between items-center w-full`}
 							>
 								{navigation.slice(4, 6).map(({ text, link }, i) =>
-									screenSize.width >= 1280 ? (
-										<a
-											onClick={() => window.scrollTo(scrollPoints[i + 4])}
-											key={i}
-											className={`navlinks ${
-												navPoint === link ? '!bg-[--black] !text-[--white]' : ''
-											}`}
-										>
-											{text}
-										</a>
-									) : (
-										<a
-											key={i}
-											href={'#' + link}
-											className={`navlinks ${
-												sectionInView === link
-													? '!bg-[--black] !text-[--white]'
-													: ''
-											}`}
-										>
-											{text}
-										</a>
-									)
+									(<a
+										key={i}
+										href={'#' + link}
+										className={`navlinks ${
+											activeId === link ? '!bg-[--black] !text-[--white]' : ''
+										}`}
+									>
+										{text}
+									</a>)
 								)}
-								{/* <div className="flex gap-2 pl-3">
-									{footerSectionText.socialMedia.map((sme, i) => (
-										<SocialButton
-											key={i}
-											link={sme.link}
-											icon={socialIcons[i]}
-										/>
-									))}
-								</div> */}
 								<motion.a
 									whileHover={{ scale: 1.1 }}
 									whileTap={{ scale: 0.9 }}
@@ -301,7 +225,7 @@ const Navbar = ({ sectionInView }) => {
 											setMenuToggled(false);
 										}}
 										className={`navlinks !text-[7vw] !font-semibold ${
-											sectionInView === link
+											activeId === link
 												? '!bg-[--black] !text-[--white]'
 												: ''
 										}`}

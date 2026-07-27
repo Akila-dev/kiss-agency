@@ -28,11 +28,7 @@ const ServiceList = ({ scrollYProgress }) => {
 	// const iconsList = [...icons, ...icons, ...icons];
 	return (
 		<div className="w-full overflow-x-auto no-scrollbar">
-			<motion.div
-				variants={slideInBottom}
-				initial="initial"
-				whileInView="animate"
-				custom={2}
+			<div
 				className="w-full relative"
 			>
 				<div className="flex gap-4">
@@ -53,18 +49,18 @@ const ServiceList = ({ scrollYProgress }) => {
 						{[...serviceList, ...serviceList, ...serviceList].map((item, i) => (
 							<SwiperSlide key={i}>
 								<div
-									className={`min-w-[170px] xl:min-w-[150px] flex flex-col gap-4 items-center  justify-center text-center px-8 py-5 xl:py-3 border-2 relative h-full ${
+									className={`min-w-[135px] md:min-w-[165px] flex flex-col gap-4 items-center  justify-center text-center px-8 py-5 xl:py-3 border-2 relative h-full ${
 										i % 2 ? 'border-[--black]' : 'border-[--gray]'
 									}`}
 								>
-									<span className="absolute top-0 right-0 bg-[--neutral] w-[15px] h-full"></span>
+									<span className="absolute top-0 right-0 bg-[--neutral] w-[10px] md:w-[15px] h-full"></span>
 									<img
 										src={item.icon}
 										alt={item.text}
-										className="w-[40px] h-[40px] object-contain"
+										className="w-[35px] md:w-[40px] h-[35px] md:h-[40px] object-contain"
 									/>
 									{/* {iconsList[i]} */}
-									<p className="font-bold xl:!leading-[130%]">{item.text}</p>
+									<p className="font-bold xl:!leading-[130%] !text-xs md:!text-sm">{item.text}</p>
 								</div>
 							</SwiperSlide>
 						))}
@@ -86,7 +82,7 @@ const ServiceList = ({ scrollYProgress }) => {
 						</div>
 					))} */}
 				</div>
-			</motion.div>
+			</div>
 		</div>
 	);
 };

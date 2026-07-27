@@ -22,29 +22,24 @@ const OurValues = () => {
 	return (
 		<div
 			ref={container}
-			// id="values"
-			className="w-full relative mt-[50px] section-py"
+			className="w-full relative section-pt section-pb bg-[--dark]"
 		>
 			<div
-				className={`container grid grid-cols-1 gap-y-10 ${
-					!showingIFrame
-						? 'xl:grid-cols-  xl:gap-[50px] xl:flex xl:!max-w-full xl:pl-[8rem]'
-						: ''
-				} `}
+				className={`container grid grid-cols-1 gap-y-10`}
 			>
-				<div className="space-y-7 lg:space-y-10 w-full md:w-[85%] xl:w-full col-span-2 flex flex-col justify-center xl:min-w-[500px] xl:max-w-[500px]">
+				<div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-14 xl:gap-20">
 					<Heading
 						tag={ourValuesSectionText.tag}
 						header={ourValuesSectionText.heading}
 						content={ourValuesSectionText.text}
+						lightText
 					/>
-					<Tags tags={ourValuesSectionText.keywords} />
+					<div className="flex items-end">
+						<Tags tags={ourValuesSectionText.keywords} />
+					</div>
 				</div>
 				<motion.div
-					transition={{ staggerChildren: 0.05 }}
-					className={`grid col-span-3 grid-cols-1 md:grid-cols-2 gap-7 md:gap-10 ${
-						!showingIFrame ? 'xl:grid-cols-4 xl:min-w-[1240px]' : ''
-					}`}
+					className={`grid col-span-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6`}
 				>
 					{values.map((value, i) => (
 						<Blog
@@ -61,7 +56,6 @@ const OurValues = () => {
 					))}
 				</motion.div>
 			</div>
-			{/* <DottedNavigation /> */}
 		</div>
 	);
 };

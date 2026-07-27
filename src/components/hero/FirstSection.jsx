@@ -117,15 +117,6 @@ const FirstSection = ({ scrollYProgress }) => {
 			</div>
 			<div className="hidden md:block h-full w-[60px] md:!w-[60px] min-w-[60px] z-10 bg-[--neutral] relative">
 				<SideNav y={springYTranslate} />
-				{/* <div
-          className={`fixed top-0 w-[60px] bg-[--neutral] h-screen ${
-            screenSize.width >= 768
-              ? `left-[${500 - 6}]`
-              : `left-[${screenSize.width - 60}]`
-          }`}
-        >
-          <SideNav y={yTranslate} />
-        </div> */}
 			</div>
 		</motion.div>
 	);

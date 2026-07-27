@@ -99,12 +99,12 @@ export const navigation = [
 		link: 'about',
 	},
 	{
-		text: 'Our values',
-		link: 'values',
-	},
-	{
 		text: 'Our services',
 		link: 'services',
+	},
+	{
+		text: 'Our values',
+		link: 'values',
 	},
 	{
 		text: 'Digital solutions',

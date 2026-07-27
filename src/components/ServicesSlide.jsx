@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { motion } from 'framer-motion';
 // import { services } from '../utils/constants';
-import { slideInRight, slideInBottom } from '../utils/variants';
+import { slideInRight, slideInBottom, popupVariant } from '../utils/variants';
 
 import { Swiper, SwiperSlide, useSwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -22,9 +22,9 @@ const getWindowsDimension = () => {
 const ServiceCard = ({ icon, title, text }) => {
 	return (
 		<div className="flex flex-col w-full gap-3 items-center justify-center p-5 bg-[--neutral] h-[90%] text-center cursor-grab group hover:bg-[--black] hover:text-[--neutral] shadow-2xl shadow-[--white]">
-			<img src={icon} alt={title} className="h-[80px] w-auto object-contain" />
+			<img src={icon} alt={title} className="h-[60px] lg:h-[80px] w-auto object-contain" />
 			<h2 className="group-hover:text-[--neutral]">{title}</h2>
-			<p className="!leading-[140%">{text}</p>
+			<p className="!text-xs lg:!text-sm">{text}</p>
 		</div>
 	);
 };
@@ -44,7 +44,7 @@ const ServicesSlide = ({ services }) => {
 	}, []);
 	return (
 		<motion.div
-			variants={slideInBottom}
+			variants={popupVariant}
 			initial="initial"
 			whileInView="animate"
 			custom={0}

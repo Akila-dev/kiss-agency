@@ -58,7 +58,7 @@ const CallUs = () => {
 					initial="initial"
 					whileInView="animate"
 					exit="exit"
-					className="w-full h-screen fixed top-0 left-0 bg-[#ffffff0a] backdrop-blur flex justify-center items-center px-5"
+					className="w-full h-screen fixed top-0 left-0 bg-[#ffffff0a] backdrop-blur flex justify-center items-center px-5 z-[1000]"
 				>
 					<motion.div
 						variants={slideInBottom3}

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { accordionContent } from '../utils/constants';
-import { slideInBottom } from '../utils/variants';
+import { slideInBottom, slideInBottom3 } from '../utils/variants';
 
 import { FaCaretUp } from 'react-icons/fa6';
 
@@ -19,7 +19,7 @@ const AccordionCard = ({ i, heading, content, expanded, setExpanded }) => {
 				onClick={() => setExpanded(isOpen ? false : i)}
 				className="px-5 py-3 cursor-pointer flex justify-between items-center"
 			>
-				<h2 className={isOpen ? '!text-white' : 'text-white'}>{heading}</h2>
+				<h2 className={`text-sm lg:text-base ${isOpen ? '!text-white' : 'text-white'}`}>{heading}</h2>
 				<motion.div
 					animate={{
 						rotateX: isOpen ? '180deg' : '0deg',
@@ -49,24 +49,24 @@ const AccordionCard = ({ i, heading, content, expanded, setExpanded }) => {
 						transition={{
 							type: 'tween',
 							duration: 0.5,
+							staggerChildren: 0.1
 						}}
 					>
-						{content.map(({ title, text }, i) => (
-							<motion.div
-								initial={{ opacity: 0, y: [50] }}
-								whileInView={{ opacity: [0, 1], y: [50, 0] }}
-								transition={{
-									type: 'tween',
-									duration: 0.5,
-									delay: i * 0.2,
-								}}
-								key={i}
-								className="space-y-2 pt-2"
-							>
-								<h3>{title}</h3>
-								<p>{text}</p>
-							</motion.div>
-						))}
+						<motion.div
+							initial="initial"
+							whileInView="animate"
+							transition={{ staggerChildren: 0.1 }}>
+							{content.map(({ title, text }, i) => (
+								<motion.div
+									variants={slideInBottom3}
+									key={i}
+									className="space-y-2 pt-2"
+								>
+									<h3 className="text-sm">{title}</h3>
+									<p>{text}</p>
+								</motion.div>
+							))}
+						</motion.div>
 					</motion.section>
 				)}
 			</AnimatePresence>
@@ -78,10 +78,9 @@ const Accordion = () => {
 	const [expanded, setExpanded] = useState(0);
 	return (
 		<motion.div
-			variants={slideInBottom}
-			initial="initial"
-			whileInView="animate"
-			cuatom={1}
+			initial={{ opacity: 0, scale: 0.9 }}
+			whileInView={{ scale: [0.9, 1.1, 1], opacity: [0, 1] }}
+			transition={{ duration: 0.5 }}
 			className="space-y-3"
 		>
 			{accordionContent.map(({ heading, content }, i) => (

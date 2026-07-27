@@ -31,7 +31,7 @@ const Footer = ({ type }) => {
 			whileInView="animate"
 			className="bg-[--white] container"
 		>
-			<div className="grid grid-cols-3 footer-header-space gap-[25px]  border-t border-[--neutral] py-5">
+			<div className="grid grid-cols-3 footer-header-space gap-[25px] border-t border-[--neutral] py-5">
 				<motion.div
 					variants={slideInBottom2}
 					initial="initial"
@@ -95,7 +95,7 @@ const Footer = ({ type }) => {
 			// variants={slideInBottom2}
 			initial="initial"
 			whileInView="animate"
-			className="py-[25px] md:py-[50px] xl:py-10 bg-[--white] xl:!min-h-[175px] xl:max-h-[175px]  xl:h-full"
+			className="py-12 bg-[--white]"
 		>
 			<div className="container grid grid-cols-1 lg:grid-cols-5 gap-[25px] lg:gap-[50px]">
 				<motion.div
@@ -107,12 +107,12 @@ const Footer = ({ type }) => {
 					<Logo />
 					<p>{footerSectionText.text}</p>
 				</motion.div>
-				<div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 footer-header-space gap-[25px]">
+				<div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-[25px]">
 					<motion.div
 						variants={slideInBottom2}
 						initial="initial"
 						whileInView="animate"
-						className="mt-[8px]"
+						className="footer-header-space"
 					>
 						<h2>Contact</h2>
 						<div className="!space-y-1 gap-0">
@@ -139,6 +139,7 @@ const Footer = ({ type }) => {
 						variants={slideInBottom2}
 						initial="initial"
 						whileInView="animate"
+						className="footer-header-space"
 					>
 						<h2>Mail</h2>
 						<p>
@@ -152,9 +153,10 @@ const Footer = ({ type }) => {
 						variants={slideInBottom2}
 						initial="initial"
 						whileInView="animate"
+						className="footer-header-space"
 					>
 						<h2>Socials</h2>
-						<p className="flex gap-2 pt-1">
+						<p className="flex gap-2">
 							{footerSectionText.socialMedia.map((sme, i) => (
 								<SocialButton key={i} link={sme.link} icon={socialIcons[i]} />
 							))}

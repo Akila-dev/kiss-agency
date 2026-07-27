@@ -9,7 +9,7 @@ const Tags = ({ tags }) => {
 			whileInView="animate"
 			transition={{ staggerChildren: 0.2 }}
 			viewport={{ margin: '0px -150px -150px 0px' }}
-			className="flex flex-wrap gap-2"
+			className="flex flex-wrap gap-2 overflow-clip"
 		>
 			{tags.map((tag, i) => (
 				<motion.div
