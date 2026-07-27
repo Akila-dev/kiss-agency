@@ -33,7 +33,7 @@ const MiddleSection = ({ scrollYProgress }) => {
 	}, []);
 
 	// *SCROLL CONTROLS
-	const hX = useTransform(scrollYProgress, [0, 0.4], [screenSize.width / 8, 0]);
+	const hX = useTransform(scrollYProgress, [0, 0.4], [screenSize.width / 6, 0]);
 	const springHX = useSpring(hX, { damping: 25 });
 
 	const logoX = useTransform(scrollYProgress, [0, 0.3], [0, 0]);
@@ -56,41 +56,6 @@ const MiddleSection = ({ scrollYProgress }) => {
 
 	return (
 		<div className="relative w-screen min-w-[100vw] h-screen">
-			{/* <div className="absolute top-[0%] left-0 w-full h-full opacity-10">
-				<Lottie
-					animationData={chart}
-					style={{
-						objectFit: 'cover',
-						width: '100%',
-						height: '100%',
-						overflow: 'clip',
-					}}
-				/>
-			</div> */}
-			{/* <div className="absolute bottom-0 left-0 w-full h-full">
-				<div className="w-full h-screen overflow-hidde">
-					{[1, 2, 3, 4].map((i) => (
-						<marquee
-							key={i}
-							width="100%"
-							direction={i % 2 ? 'left' : 'right'}
-							behavior="scrolling"
-							vspace="0%"
-							hspace="0%"
-							// scrollAmount={}
-							height={screenSize.width >= 1024 ? '25%' : '15%'}
-						>
-							<h1 className="text-[15vh] lg:text-[25vh] leading-[100%] flex gap-5 uppercase opacity-5">
-								{['Agency', 'web', 'soft', 'AI', 'design', 'ads'].map(
-									(text, j) => (
-										<span key={j}>kiss {text}</span>
-									)
-								)}
-							</h1>
-						</marquee>
-					))}
-				</div>
-			</div> */}
 			<div className="absolute bottom-0 left-0 w-full h-full">
 				<div className="w-full h-screen overflow-hidden opacity-5">
 					{[1, 2, 3, 4, 5, 6].map((i) => (
@@ -152,8 +117,8 @@ const MiddleSection = ({ scrollYProgress }) => {
 						style={{ translateX: springHX }}
 						initial="initial"
 						whileInView="animate"
-						viewport={{ amount: 0.35 }}
-						transition={{ staggerChildren: 0.08 }}
+						viewport={{ once:true, amount: 0.25 }}
+						transition={{ staggerChildren: 0.04 }}
 						className="text-[15vw] lg:text-[9.5vw] font-medium !leading-[100%] lg:!leading-[85%] pb-[2.5vw] relative pr-[25px] px-5 lg:px-0 flex flex-wrap gap-x-2 gap-y-1 lg:gap-5 w-[100%] md:w-[70vw] xl:w-[65vw]"
 					>
 						{titleText.map((title, n) => (
@@ -171,10 +136,6 @@ const MiddleSection = ({ scrollYProgress }) => {
 						))}
 
 						<motion.div
-							// whileHover={{ scale: 1.1 }}
-							// whileTap={{ scale: 0.9 }}
-							// transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-							// href="#about"
 							className=" lg:absolute lg:bottom-0 right-0 mt-7 md:mt-12 lg:mt-0 pointer-events-auto flex"
 						>
 							<motion.a

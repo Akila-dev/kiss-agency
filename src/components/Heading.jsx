@@ -2,10 +2,8 @@ import React from 'react';
 
 import { motion } from 'framer-motion';
 import {
-	slideInRight,
 	slideInBottom,
 	revealText2,
-	fallDownVariant,
 	slideInTop,
 } from '../utils/variants';
 
@@ -24,37 +22,35 @@ const RevealText = ({ text, stagger }) => (
 	</motion.span>
 );
 
-const Heading = ({ tag, header, content, btn }) => {
+const Heading = ({ tag, header, content, btn, lightText }) => {
 	return (
 		<motion.div
-			// variants={slideInBottom}
 			initial="initial"
 			whileInView="animate"
-			viewport={{ margin: '0px -150px -150px 0px' }}
+			viewport={{ once: true, amount: 0.25 }}
 			transition={{ staggerChildren: 0.25 }}
 			className="flex flex-col gap-5"
 		>
-			<motion.p variants={slideInBottom} custom={0}>
-				<span className="border border-[--black] text-[--black] px-5 py-2 font-bold">
+			<div className="flex">
+				<motion.p variants={slideInBottom} custom={0} className={`px-5 py-2 font-bold border ${lightText ? "border-[--white] text-[--white]":"border-[--black] text-[--black]"}`}>
 					{tag}
-				</span>
-			</motion.p>
-			<motion.h1 variants={slideInBottom} custom={1}>
+				</motion.p>
+			</div>
+			<motion.h1 variants={slideInBottom} custom={0.5}>
 				{header.map((word, i) => (
 					<span
 						key={i}
-						className={`${i % 2 ? 'text-[--gray]' : 'text-[--black]'}`}
+						className={`${i % 2 ? 'text-[--gray]' : lightText ? 'text-[--white]' : 'text-[--black]'}`}
 					>
 						{word}{' '}
 					</span>
 				))}
 			</motion.h1>
-			<motion.p variants={slideInBottom} custom={2}>
-				{/* <RevealText text={content} stagger={0.01} /> */}
+			<motion.p variants={slideInBottom} custom={1}>
 				{content}
 			</motion.p>
 			{btn && (
-				<motion.div variants={slideInTop} custom={3} className="pt-3 flex">
+				<motion.div variants={slideInTop} custom={3} className="flex">
 					<motion.a
 						whileHover={{ scale: 1.1 }}
 						whileTap={{ scale: 0.9 }}

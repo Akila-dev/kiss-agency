@@ -36,38 +36,29 @@ const Blog = ({ title, excerpt, link, img, type, lottie, clip, i }) => {
 			variants={slideInBottom}
 			initial="initial"
 			whileInView="animate"
-			// viewport={{ amount: 0.25 }}
+			viewport={{ once: true, amount: 0.25 }}
 			custom={0}
-			className="relative flex flex-col blog-card lg:min-w-[300px] xl:min-w-[200px"
+			className="relative flex flex-col blog-card w-full"
 		>
 			<motion.div
 				variants={slideInRight}
 				initial="initial"
-				animate="animate"
+				whileInView="animate"
+				// viewport={{ once: true, amount: 0.25 }}
 				custom={1}
 				className="w-full relative bg-[--neutral] py-5 overflow-clip"
 			>
-				<span
-					className={`absolute z-[-1] w-[50%] h-[90px] bg-[--white] border-2 border-[--black] ${
-						type[0] === 't' ? 'top-[-10px]' : 'bottom-[-10px]'
-					} ${type[1] === 'l' ? 'left-[-10px]' : 'right-[-10px]'} `}
-				></span>
-				{/* <img
-          src={img}
-          alt={title}
-          className="relative h-[100px] w-full object-cover"
-        /> */}
 				<div
 					className={`relative !my-[-${clip[0]}%] flex object-contain p-0 m-0 ${
-						i === 2 ? 'scale-[1.8]' : ''
-					} ${i === 3 ? 'scale-[1.3]' : ''} `}
+						i === 2 ? 'scale-[1.5]' : ''
+					} ${i === 3 ? 'scale-[1]' : ''} `}
 				>
 					<Lottie
 						animationData={lottie}
 						style={{
 							objectFit: 'cover',
 							width: '100%',
-							height: '200px',
+							height: '160px',
 							overflow: 'clip',
 						}}
 					/>
@@ -78,7 +69,7 @@ const Blog = ({ title, excerpt, link, img, type, lottie, clip, i }) => {
 				initial="initial"
 				animate="animate"
 				custom={1}
-				className="pt-4 pb-2"
+				className="pt-4 pb-2 !text-white"
 			>
 				{title}
 			</motion.h3>
@@ -105,11 +96,11 @@ const Blog = ({ title, excerpt, link, img, type, lottie, clip, i }) => {
 					className="w-auto"
 				>
 					{screenSize.width >= 1280 ? (
-						<a onClick={() => scrollToContact()} className="btn-2">
+						<a onClick={() => scrollToContact()} className="btn-2 !text-white !border-white">
 							Learn More
 						</a>
 					) : (
-						<a href="#contact" className="btn-2">
+						<a href="#contact" className="btn-2 !text-white !border-white">
 							Learn More
 						</a>
 					)}
